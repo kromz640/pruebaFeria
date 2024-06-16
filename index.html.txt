@@ -1,0 +1,19 @@
+<!DOCTYPE html> 
+<html lang=”es”> 
+<head> 
+<meta charset=”UTF-8”> 
+<title>Datos en Tiempo Real</title> 
+<link rel=”stylesheet” href=”styles.css”> 
+<script src=”realtime.js” defer></script> 
+</head> 
+<body> 
+<h1>Datos en Tiempo Real</h1> 
+<div id=”weather-data”> 
+<p>Temperatura: <span id=”temperature”>-</span> °C</p> 
+<p>Humedad: <span id=”humidity”>-</span> %</p> 
+<p>Presión Atmosférica: <span id=”pressure”>-</span> hPa</p> 
+<p>Tiempo: <span id=”timestamp”>-</span></p> 
+<img id=”weather-image” src=”” alt=”Estado del Clima”> 
+</div> 
+</body> 
+</html>

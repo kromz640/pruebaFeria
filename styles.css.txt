@@ -1,0 +1,57 @@
+body { 
+Font-family: Arial, sans-serif; 
+Background-color: #f0f0f0; 
+Margin: 0; 
+Padding: 20px; 
+} 
+H1 { 
+Text-align: center; 
+} 
+Form { 
+Margin-bottom: 20px; 
+} 
+Table { 
+Width: 100%; 
+Border-collapse: collapse; 
+Margin-bottom: 20px; 
+} 
+Table, th, td { 
+Border: 1px solid #ddd; 
+} 
+Th, td { 
+Padding: 8px; 
+Text-align: left; 
+} 
+Th { 
+Background-color: #f2f2f2; 
+} 
+Tr:nth-child(even) { 
+Background-color: #f9f9f9; 
+} 
+Tr:hover { 
+Background-color: #f1f1f1; 
+} 
+Button { 
+Background-color: #4CAF50; 
+Color: white; 
+Border: none; 
+Padding: 10px 20px; 
+Cursor: pointer; 
+} 
+Button:hover { 
+Background-color: #45ª049; 
+} 
+#weather-data { 
+Text-align: center; 
+} 
+#weather-data p { 
+Font-size: 1.2em; 
+} 
+#weather-image { 
+Max-width: 200px; 
+Margin-top: 20px; 
+} 
+Canvas { 
+Max-width: 100%; 
+Margin-top: 20px; 
+} 

@@ -1,0 +1,52 @@
+document.addEventListener(‘DOMContentLoaded’, () => { 
+    Const intervalForm = document.getElementById(‘interval-form’); 
+    Const searchForm = document.getElementById(‘search-form’); 
+ 
+    intervalForm.addEventListener(‘submit’, function€ { 
+        e.preventDefault(); 
+        const interval = document.getElementById(‘interval’).value; 
+ 
+        fetch(‘datos.php’, { 
+            method: ‘POST’, 
+            headers: { 
+                ‘Content-Type’: ‘application/x-www-form-urlencoded’, 
+            }, 
+            Body: `interval=${interval}` 
+        }) 
+        .then(response => response.text()) 
+        .then(data => { 
+            Alert(data); 
+        }); 
+    }); 
+ 
+    searchForm.addEventListener(‘submit’, function€ { 
+        e.preventDefault(); 
+        const datetime = document.getElementById(‘datetime’).value.replace(‘T’, ‘ ‘); 
+ 
+        fetch(`datos.php?action=search&datetime=${datetime}`) 
+        .then(response => response.json()) 
+        .then(data => { 
+            Let table = document.getElementById(‘data’); 
+            Table.innerHTML = ‘’; 
+            Data.forEach(row => { 
+                Let tr = document.createElement(‘tr’); 
+                Tr.innerHTML = 
+`<td>${row.temperature}</td><td>${row.humidity}</td><td>${row.pressure}</td><td>
+ ${row.timestamp}</td>`; 
+                Table.appendChild(tr); 
+            }); 
+}); 
+}); 
+Fetch(‘datos.php?action=fetch’) 
+.then(response => response.json()) 
+.then(data => { 
+Let table = document.getElementById(‘data’); 
+Data.forEach(row => { 
+Let tr = document.createElement(‘tr’); 
+Tr.innerHTML = 
+`<td>${row.temperature}</td><td>${row.humidity}</td><td>${row.pressure}</td><td>
+ ${row.timestamp}</td>`; 
+Table.appendChild(tr); 
+}); 
+}); 
+});

@@ -1,0 +1,62 @@
+<?php 
+$servername = “localhost”; 
+$username = “root”; 
+$password = “”; 
+$dbname = “clima”; 
+// Crear conexión 
+$conn = new mysqli($servername, $username, $password, $dbname); 
+// Verificar conexión 
+If ($conn->connect_error) { 
+Die(“Connection failed: “ . $conn->connect_error); 
+} 
+// Insertar datos de temperatura, humedad y presión 
+If (isset($_GET[‘temperature’]) && isset($_GET[‘humidity’]) && 
+isset($_GET[‘pressure’])) { 
+$temperature = $_GET[‘temperature’]; 
+$humidity = $_GET[‘humidity’]; 
+$pressure = $_GET[‘pressure’]; 
+$sql = “INSERT INTO datos (temperature, humidity, pressure) VALUES 
+(‘$temperature’, ‘$humidity’, ‘$pressure’)”; 
+If ($conn->query($sql) === TRUE) { 
+Echo “Nuevo registro creado con éxito”; 
+} else { 
+Echo “Error: “ . $sql . “<br>” . $conn->error; 
+} 
+} 
+// Guardar intervalo 
+If (isset($_POST[‘interval’])) { 
+$interval = intval($_POST[‘interval’]); 
+File_put_contents(‘interval.txt’, $interval); 
+Echo “Intervalo guardado”; 
+} 
+// Acciones basadas en el parámetro ‘action’ 
+If (isset($_GET[‘action’])) { 
+If ($_GET[‘action’] == ‘fetch’) { 
+Header(‘Content-Type: application/json’); 
+$sql = “SELECT * FROM datos”; 
+$result = $conn->query($sql); 
+$rows = array(); 
+While ($r = mysqli_fetch_assoc($result)) { 
+$rows[] = $r; 
+} 
+Echo json_encode($rows); 
+} elseif ($_GET[‘action’] == ‘search’ && isset($_GET[‘datetime’])) { 
+Header(‘Content-Type: application/json’); 
+$datetime = $_GET[‘datetime’]; 
+$sql = “SELECT * FROM datos WHERE timestamp LIKE ‘$datetime%’”; 
+$result = $conn->query($sql); 
+$rows = array(); 
+While ($r = mysqli_fetch_assoc($result)) { 
+$rows[] = $r; 
+} 
+Echo json_encode($rows); 
+} elseif ($_GET[‘action’] == ‘latest’) { 
+Header(‘Content-Type: application/json’); 
+$sql = “SELECT * FROM datos ORDER BY timestamp DESC LIMIT 1”; 
+$result = $conn->query($sql); 
+$row = mysqli_fetch_assoc($result); 
+Echo json_encode($row); 
+} 
+} 
+$conn->close(); 
+¿>

@@ -1,0 +1,55 @@
+document.addEventListener(‘DOMContentLoaded’, () => { 
+Fetch(‘datos.php?action=fetch’) 
+.then(response => response.json()) 
+.then(data => { 
+Const labels = data.map(row => row.timestamp); 
+Const temperatures = data.map(row => row.temperature); 
+Const humidities = data.map(row => row.humidity); 
+Const pressures = data.map(row => row.pressure); 
+ 
+            Const temperatureCtx = 
+document.getElementById(‘temperatureChart’).getContext(‘2d’); 
+            Const humidityCtx = 
+document.getElementById(‘humidityChart’).getContext(‘2d’); 
+            Const pressureCtx = 
+document.getElementById(‘pressureChart’).getContext(‘2d’); 
+ 
+            New Chart(temperatureCtx, { 
+                Type: ‘line’, 
+                Data: { 
+                    Labels: labels, 
+                    Datasets: [{ 
+                        Label: ‘Temperatura (°C)’, 
+                        Data: temperatures, 
+                        borderColor: ‘rgba(255, 99, 132, 1)’, 
+                        borderWidth: 1 
+                    }] 
+                } 
+            }); 
+ 
+            New Chart(humidityCtx, { 
+                Type: ‘line’, 
+                Data: { 
+                    Labels: labels, 
+                    Datasets: [{ 
+                        Label: ‘Humedad (%)’, 
+                        Data: humidities, 
+                        borderColor: ‘rgba(54, 162, 235, 1)’, 
+                        borderWidth: 1 
+                    }] 
+                } 
+            }); 
+ 
+            New Chart(pressureCtx, { 
+                Type: ‘line’, 
+                Data: { 
+                    Labels: labels, 
+                    Datasets: [{ 
+                        Label: ‘Presión (hPa)’, 
+                        Data: pressures, 
+                        borderColor: ‘rgba(75, 192, 192, 1)’, 
+                        borderWidth: 1 
+                    }] 
+                } 
+            }); 
+        });

@@ -1,0 +1,23 @@
+document.addEventListener(‘DOMContentLoaded’, () => { 
+Function fetchWeatherData() { 
+Fetch(‘datos.php?action=latest’) 
+.then(response => response.json()) 
+            .then(data => { 
+                Document.getElementById(‘temperature’).innerText = data.temperature; 
+                Document.getElementById(‘humidity’).innerText = data.humidity; 
+                Document.getElementById(‘pressure’).innerText = data.pressure; 
+                Document.getElementById(‘timestamp’).innerText = data.timestamp; 
+ 
+                Let weatherImage = document.getElementById(‘weather-image’); 
+                If (data.temperature > 30) { 
+                    weatherImage.src = ‘hot.png’; 
+                } else if (data.temperature < 10) { 
+                    weatherImage.src = ‘cold.png’; 
+                } else { 
+                    weatherImage.src = ‘mild.png’; 
+                } 
+            }); 
+    } 
+ 
+    setInterval(fetchWeatherData, 5000); // Actualiza cada 5 segundos 
+}); 
